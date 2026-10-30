@@ -14,7 +14,7 @@ class DeepSeekConfig:
     model: str = field(default_factory=lambda: os.getenv("DEEPSEEK_MODEL", "deepseek-chat"))
     max_tokens: int = field(default_factory=lambda: int(os.getenv("DEEPSEEK_MAX_TOKENS", "4096")))
     temperature: float = field(default_factory=lambda: float(os.getenv("DEEPSEEK_TEMPERATURE", "0.3")))
-
+    rate_limit_rpm: int = field(default_factory=lambda:int(os.getenv("DEEPSEEK_RATE_RPM","60")))
 
 @dataclass
 class SSEConfig:
