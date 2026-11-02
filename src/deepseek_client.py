@@ -47,7 +47,7 @@ class DeepSeekClient:
         window_start = now - 60
         self._request_timestamps = [ts for ts in self._request_timestamps if ts > window_start]
 
-        if len(self._request_timestamps) >= self._config.rate_limit_rpm:
+        if len(self._request_timestamps) >= self.config.rate_limit_rpm:
             sleep_time = 60 - (now - self._request_timestamps[0]) + 0.1
             time.sleep(sleep_time)
 

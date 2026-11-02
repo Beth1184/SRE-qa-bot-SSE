@@ -4,7 +4,8 @@ from dataclasses import dataclass, field
 from dotenv import load_dotenv
 
 # 加载项目根目录 .env 文件，放在最前面
-load_dotenv()
+# override=True：强制 .env 覆盖系统环境变量，避免终端里残留的旧值干扰
+load_dotenv(override=True)
 
 @dataclass
 class DeepSeekConfig:
@@ -24,6 +25,16 @@ class SSEConfig:
     )
 
 
+@dataclass
+class LarkConfig:
+    """飞书应用配置"""
+    app_id: str = field(default_factory=lambda: os.getenv("LARK_APP_ID", ""))
+    app_secret: str = field(default_factory=lambda: os.getenv("LARK_APP_SECRET", ""))
+    verification_token: str = field(default_factory=lambda: os.getenv("LARK_VERIFICATION_TOKEN", ""))
+    encrypt_key: str = field(default_factory=lambda: os.getenv("LARK_ENCRYPT_KEY", ""))
+
+
 # 全局单例，项目别的地方直接 import
 deepseek_cfg = DeepSeekConfig()
 sse_cfg = SSEConfig()
+lark_cfg = LarkConfig()
